@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 
 import workOrderRouter from "./routes/workorders.routes";
+import { requestLog } from "./middleware/requestId.Logger.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use()
+app.use(requestLog);
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
