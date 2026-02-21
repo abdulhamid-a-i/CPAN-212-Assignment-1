@@ -5,6 +5,7 @@ export async function requestLog(req, res, next){
     const reqId = crypto.randomUUID();
     const start = nowIso();
 
+    req.requestId = reqId;
     res.setHeader('X-Request-Id', reqId);
     res.startTime = start;
 

@@ -12,7 +12,7 @@ export const BACKEND_DIR = path.resolve(__dirname, ".");
 
 export const PATHS = {
     DATA_DIR: path.join(BACKEND_DIR, "src","data"),
-    INCIDENTS_INDEX: path.join(BACKEND_DIR,"src","store","data","incidents.json")
+    WORKORDER_INDEX: path.join(BACKEND_DIR,"src","store","data","workorders.json")
 };
 
 export const LIMITS = {
