@@ -3,6 +3,9 @@ import cors from "cors";
 
 import workOrderRouter from "./routes/workorders.routes";
 import { requestLog } from "./middleware/requestId.Logger.js";
+import { authRequest } from "./middleware/auth.middleware.js";
+import { AppError } from "./utils/apperror.js";
+import { errorHandler } from "./middleware/errors.middleware.js";
 
 const app = express();
 
@@ -14,15 +17,16 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.use("/api/workorders", workOrderRouter);
+app.use("/api/workorders",authRequest, workOrderRouter);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: "Internal server error" });
+app.use((req, res, next) => {
+  next(new AppError(400, "NOT_FOUND", "Route not found"))
 });
+
+app.use(errorHandler)
 
 export default app;

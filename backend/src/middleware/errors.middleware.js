@@ -1,5 +1,3 @@
-import { AppError } from "../utils/apperror.js";
-
 export const errorHandler = (err, req, res, next) => {
     const requestID = req.requestId
     const statusCode = err.statusCode || 500;
