@@ -1,0 +1,20 @@
+import { AppError } from "../utils/apperror.js";
+
+export const errorHandler = (err, req, res, next) => {
+    const requestID = req.requestId
+    const statusCode = err.statusCode || 500;
+    const code = err.code || 'Internal Server Error';
+    const message = err.message;
+    const details = err.details;
+    console.log(req.requestId)
+    res.status(statusCode).json({
+        requestId: requestID,
+        success: false,
+        error: {
+            code: code,
+            message: message,
+            detials: details
+        }
+    });
+
+}
