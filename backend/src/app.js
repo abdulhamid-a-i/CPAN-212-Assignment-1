@@ -14,7 +14,7 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.use("/api/workorders", workOrderRouterRouter);
+app.use("/api/workorders", workOrderRouter);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
