@@ -13,9 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLog);
 
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
-});
+app.get("/health", );
 
 app.use("/api/workorders",authRequest, workOrderRouter);
 
