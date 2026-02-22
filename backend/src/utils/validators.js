@@ -1,4 +1,4 @@
-import { ENUMS } from "../../config";
+import { ENUMS } from "../../config.js";
 
 
 export function isCSV(filename) {
@@ -6,7 +6,7 @@ export function isCSV(filename) {
 }
 
 
-export function validateWorkOrder(body) {
+export function validateCreateWorkOrder(body) {
  const departments = ENUMS.DEPARTMENTS;
  const priorities = ENUMS.PRIORITY;
  const status = ENUMS.STATUS;
@@ -28,4 +28,8 @@ export function validateWorkOrder(body) {
       severity: body.severity
     }
   };
+}
+
+export function validateStatusChange(){
+    return null;
 }

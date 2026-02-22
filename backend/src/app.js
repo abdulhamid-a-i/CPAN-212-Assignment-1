@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 
-import workOrderRouter from "./routes/workorders.routes";
+import workOrderRouter from "./routes/workorders.routes.js";
 import { requestLog } from "./middleware/requestId.Logger.js";
 import { authRequest } from "./middleware/auth.middleware.js";
 import { AppError } from "./utils/apperror.js";
 import { errorHandler } from "./middleware/errors.middleware.js";
+import indexRouter from "./routes/index.route.js"
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLog);
 
-app.get("/health", );
+app.get("/health",indexRouter);
 
 app.use("/api/workorders",authRequest, workOrderRouter);
 
