@@ -1,9 +1,11 @@
 import express from "express";
 import multer from "multer";
 
-import { listAll, findById, createWorkorder, updateStatus } from "../store/workorders.store.js";
+
 import { parseCsvBuffer } from "../utils/csv.js";
 import { validateCreateWorkorder, validateStatusChange } from "../utils/validate.js";
+import { sendJson } from "../middleware/response.middleware.js";
+import { AppError } from "../utils/apperror.js";
 
 
 const router = express.Router();
@@ -12,9 +14,23 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.get("/", async (req, res) => {
   // Will accept parameters like dep (look at lab 2)
+  
+  const {status, department, priority, assignee, page, limit} = req.query;
+  const workOrders = await workOrderService.list({
+    status: status || null,
+    department: department || null,
+    priority: priority || null,
+    assignee: assignee || null,
+    page: parseInt(page) || 1,
+    limit: parseInt(limit) || 10,
+  })
+
+  return sendJson(res, 200, req.requestId, workOrders)
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
+  const workOrder = await workOrderService.findById(req.params.id);
+  if(!workOrder) return next(new AppError)
 
 });
 
