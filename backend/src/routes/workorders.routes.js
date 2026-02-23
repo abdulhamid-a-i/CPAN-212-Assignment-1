@@ -35,6 +35,9 @@ router.patch("/:id/status", async (req, res, next) => {
 });
 
 router.post("/bulk-upload", upload.single("file"), async (req, res, next) => {
+  if(!req.file){
+    return next( new AppError(400, "VALIDATION_ERROR", "File cannot be null"));
+  }
   if (req.file.buffer.length > LIMITS.MAX_CSV_BYTES){
     return next(new AppError(413,"PAYLOAD_TOO_LARGE", "File size exceeds maximum allowed file size"));
   }
