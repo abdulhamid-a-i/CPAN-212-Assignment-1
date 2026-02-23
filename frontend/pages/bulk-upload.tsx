@@ -2,6 +2,8 @@
 import { useState } from "react";
 import ErrorBanner from "../components/ErrorBanner";
 import { bulkUploadCsv } from "../services/api";
+import CsvUpload from "../components/CsvUpload";
+import Layout from "../components/Layout";
 
 type UploadResult = {
   totalRows: number;
@@ -20,6 +22,10 @@ export default function BulkUpload() {
   const [result, setResult] = useState<UploadResult | null>(null);
   const [err, setErr] = useState<UploadError | null>(null);
   const [uploading, setUploading] = useState(false);
+
+  const handleFileSelect = (data) => {
+    setFile(data)
+  }
 
   async function onUpload() {
     if (!file) {
@@ -45,7 +51,8 @@ export default function BulkUpload() {
   }
 
   return (
-    <div className="container">
+    <Layout title="Bulk Upload">
+      <div className="container">
       <h1>Bulk Upload CSV</h1>
       <ErrorBanner error={err} />
 
@@ -53,12 +60,9 @@ export default function BulkUpload() {
         Required headers: <code>title,description,department,priority,requesterName,assignee</code>
       </div>
 
+
       <div className="upload-controls">
-        <input
-          type="file"
-          accept=".csv,text/csv"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
-        />
+        <CsvUpload onFileSelect={handleFileSelect}/>
         <button onClick={onUpload} disabled={!file || uploading}>
           {uploading ? "Uploading..." : "Upload"}
         </button>
@@ -97,5 +101,7 @@ export default function BulkUpload() {
         </div>
       )}
     </div>
+    </Layout>
+    
   );
 }
