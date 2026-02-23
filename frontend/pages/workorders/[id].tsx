@@ -35,7 +35,7 @@ export default function WorkOrderDetailsPage() {
       setMessage("");
 
       const data = await getWorkOrder(id);
-      setWorkOrder(data);
+      setWorkOrder(data.data);
       setStatus(data.status);
     } catch (e) {
       setError(e.message || "Failed to load work order");

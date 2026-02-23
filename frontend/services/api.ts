@@ -48,6 +48,7 @@ export async function listWorkOrders(query = {}) {
   const params = new URLSearchParams();
 
   Object.entries(query).forEach(([key, value]) => {
+    console.log(key, " ", value)
     if (value !== undefined && value !== null && value !== "") {
       params.append(key, String(value));
     }

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Layout from "../components/Layout";
 import ErrorBanner from "../components/ErrorBanner";
 import { listWorkOrders } from "../services/api";
+import FilterBar from "../components/FilterBar";
 
 export default function Dashboard() {
   const [items, setItems] = useState([]);
@@ -16,6 +17,21 @@ export default function Dashboard() {
     q: "",
   });
 
+  const handleReset = (data) => {
+    console.log("Reset: ", data)
+    setFilters(data);
+  }
+
+    const onHandleChange = (data) => {
+      console.log("change: ", data)
+    setFilters(data);
+  }
+
+    const handleLoad = () => {
+      console.log("loading")
+    load();
+  }
+
   async function load() {
     try {
       setLoading(true);
@@ -24,6 +40,7 @@ export default function Dashboard() {
       const data = await listWorkOrders({
         department: filters.department || undefined,
         priority: filters.priority || undefined,
+        status: filters.status || undefined,
         assignee: filters.assignee.trim() ? filters.assignee.trim() : undefined,
         q: filters.q.trim() ? filters.q.trim() : undefined,
         page: 1,
@@ -64,70 +81,7 @@ export default function Dashboard() {
       <ErrorBanner message={err} />
 
       {/* Filters */}
-      <div className="panel" style={{ marginBottom: 12 }}>
-        <div className="panel-title">Filters</div>
-        <div className="panel-body">
-          <div className="grid3">
-            <label className="field">
-              <div className="field-label">Department</div>
-              <select
-                value={filters.department}
-                onChange={(e) => setFilters((f) => ({ ...f, department: e.target.value }))}
-              >
-                <option value="">All</option>
-                <option value="FACILITIES">FACILITIES</option>
-                <option value="IT">IT</option>
-                <option value="SECURITY">SECURITY</option>
-                <option value="HR">HR</option>
-              </select>
-            </label>
-
-            <label className="field">
-              <div className="field-label">Priority</div>
-              <select
-                value={filters.priority}
-                onChange={(e) => setFilters((f) => ({ ...f, priority: e.target.value }))}
-              >
-                <option value="">All</option>
-                <option value="LOW">LOW</option>
-                <option value="MEDIUM">MEDIUM</option>
-                <option value="HIGH">HIGH</option>
-              </select>
-            </label>
-
-            <label className="field">
-              <div className="field-label">Assignee</div>
-              <input
-                value={filters.assignee}
-                onChange={(e) => setFilters((f) => ({ ...f, assignee: e.target.value }))}
-                placeholder="e.g. Alex"
-              />
-            </label>
-
-            <label className="field" style={{ gridColumn: "1 / -1" }}>
-              <div className="field-label">Search (title)</div>
-              <input
-                value={filters.q}
-                onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))}
-                placeholder="keyword..."
-              />
-            </label>
-          </div>
-
-          <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-            <button className="btn" onClick={load} disabled={loading}>
-              {loading ? "Loading..." : "Refresh"}
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setFilters({ department: "", priority: "", assignee: "", q: "" })}
-              disabled={loading}
-            >
-              Reset
-            </button>
-          </div>
-        </div>
-      </div>
+      <FilterBar filters={filters} title="Dashboard"onApply={handleLoad} onChange={onHandleChange} onReset={handleReset}/>
 
       {/* KPIs */}
       <div className="kpis">

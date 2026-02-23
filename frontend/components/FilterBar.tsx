@@ -1,42 +1,14 @@
 import React from "react";
 
-type Filters = {
-  status?: string;
-  department?: string;
-  priority?: string;
-  assignee?: string;
-  q?: string;
-  page?: number;
-  limit?: number;
-};
 
-type Props = {
-  title?: string;
-  filters: Filters;
-  onChange: (next: Filters) => void;
-  onApply?: () => void; // optional: if you want an Apply button
-  onReset?: () => void; // optional
-  showStatus?: boolean;
-  showSearch?: boolean;
-  showLimit?: boolean;
-};
 
-export default function FilterBar({
-  title = "Filters",
-  filters,
-  onChange,
-  onApply,
-  onReset,
-  showStatus = true,
-  showSearch = true,
-  showLimit = true,
-}: Props) {
+export default function FilterBar({filters, onChange, onApply, onReset, title}) {
   return (
     <div className="panel" style={{ marginBottom: 12 }}>
       <div className="panel-title">{title}</div>
       <div className="panel-body">
         <div className="grid3">
-          {showStatus && (
+          
             <label className="field">
               <div className="field-label">Status</div>
               <select
@@ -50,7 +22,6 @@ export default function FilterBar({
                 <option value="DONE">DONE</option>
               </select>
             </label>
-          )}
 
           <label className="field">
             <div className="field-label">Department</div>
@@ -88,7 +59,7 @@ export default function FilterBar({
             />
           </label>
 
-          {showSearch && (
+
             <label className="field" style={{ gridColumn: "1 / -1" }}>
               <div className="field-label">Search (title)</div>
               <input
@@ -97,9 +68,9 @@ export default function FilterBar({
                 placeholder="keyword..."
               />
             </label>
-          )}
+        
 
-          {showLimit && (
+        
             <label className="field">
               <div className="field-label">Per page</div>
               <select
@@ -113,7 +84,7 @@ export default function FilterBar({
                 ))}
               </select>
             </label>
-          )}
+         
 
           {(onApply || onReset) && (
             <div style={{ display: "flex", alignItems: "end", gap: 8 }}>

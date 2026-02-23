@@ -6,9 +6,9 @@
     "department": "IT",
     "priority": "LOW",
     "assignee": "",
-    "status": "NEW",
+    "status": "IN_PROGRESS",
     "createdAt": "2026-02-23T01:10:39.742Z",
-    "updatedAt": "2026-02-23T04:55:13.939Z"
+    "updatedAt": "2026-02-23T09:41:19.071Z"
   },
   {
     "id": "bdc3f4bb-5515-4482-898f-185da95f7f51",

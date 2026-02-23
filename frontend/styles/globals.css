@@ -244,7 +244,21 @@ button {
   cursor: pointer;
 }
 
+.linkbutton {
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.linkbutton:hover:not(:disabled) {
   background: #2563eb;
 }
 
