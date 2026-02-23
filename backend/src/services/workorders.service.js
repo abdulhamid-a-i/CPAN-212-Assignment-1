@@ -1,6 +1,4 @@
-import { createWorkOrder, findById, listAll, updateWorkOrder } from "../data/workorders.store.js"
-import crypto from 'crypto';
-
+import { createWorkOrder, deleteById, findById, listAll, updateStatus, updateWorkOrder } from "../data/workorders.store.js"
 
 export const workOrderService = {
     async list(filters){
@@ -26,12 +24,11 @@ export const workOrderService = {
         })
     },
 
-    async get(id){
+    async findById(id){
         return await findById(id);
     },
 
     async create({title, description, department, priority, requesterName, assignee}){
-        console.log(assignee)
         const workOrder  = {
             title,
             description,
@@ -46,7 +43,6 @@ export const workOrderService = {
     },
 
     async update(id, {title,description,priority,assignee}){
-
         const data = {
             title,
             description,
@@ -57,7 +53,13 @@ export const workOrderService = {
         return updateWorkOrder(id, data);
 
     },
+
+    async updateStatus(id, status){
+        return updateStatus(id, status);
+    },
+
     async delete(id){
+        return deleteById(id);
 
 
     }

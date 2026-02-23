@@ -27,25 +27,29 @@ export async function createWorkOrder(data) {
 
 export async function updateWorkOrder(id, data){
     const workOrders = await readIndex();
-    const idx = workOrders.findIndex((i) => i.id === id);
-    WorkOrders[idx].title = data.title;
-    WorkOrders[idx].description = data.description;
-    WorkOrders[idx].priority = data.priority;
-    WorkOrders[idx].updatedAt = new Date().toISOString;
+    const idx = workOrders.findIndex( (i) => String(i.id) === String(id));
+    workOrders[idx].title = data.title;
+    workOrders[idx].description = data.description;
+    workOrders[idx].priority = data.priority;
+    workOrders[idx].updatedAt = new Date().toISOString();
     await writeIndex(workOrders);
     return workOrders[idx];
 }
 
 export async function updateStatus(id, status){
     const workOrders = await readIndex();
-    const idx = workOrders.findIndex((i) => i.id === id);
-
+    console.log(id);
+    const idx = workOrders.findIndex( (i) => String(i.id) === String(id));
+    workOrders[idx].status = status;
+    workOrders[idx].updatedAt = new Date().toISOString();
+    await writeIndex(workOrders);
+    return workOrders[idx];
 }
 
   export async function deleteById(id){
     const workOrders = await readIndex()
     if (id < 0) return null;
     const updatedWorkOrders = workOrders.filter(d => d.id !== id);
-    await deleteIndex(updatedWorkOrders);
+    await writeIndex(updatedWorkOrders);
     return {ok: true}
   }

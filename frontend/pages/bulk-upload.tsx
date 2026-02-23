@@ -14,8 +14,8 @@ type UploadResult = {
 };
 
 type UploadError = {
-  message: string;
   requestId?: string;
+  message: string;
 };
 
 export default function BulkUpload() {
@@ -23,7 +23,7 @@ export default function BulkUpload() {
   const [result, setResult] = useState<UploadResult | null>(null);
   const [err, setErr] = useState<UploadError | null>(null);
   const [uploading, setUploading] = useState(false);
-
+  const [reqId, setReqId] = useState(null);
   const handleFileSelect = (data) => {
     setFile(data)
   }
@@ -40,11 +40,12 @@ export default function BulkUpload() {
       setResult(null);
 
       const data = await bulkUploadCsv(file);
-      setResult(data.data);
+      setResult(data);
+      setReqId(data.requestId);
     } catch (e: any) {
       setErr({
-        message: e.message || "Something went wrong.",
-        requestId: e.requestId,
+        requestId: reqId,
+        message: e.message || "Something went wrong."
       });
     } finally {
       setUploading(false);

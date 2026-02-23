@@ -36,19 +36,47 @@ export async function create(req,res, next){
 }
 
 export async function update(req,res, next){
+    const workOrder = await workOrderService.findById(req.params.id);
+    if(!workOrder) return next( new AppError(404, "NOT_FOUND", "Work order was not found"));
+
     const result = validateUpdate(req.body);
     if (!result.ok){
         return next( new AppError(400, "VALIDATION_ERROR", "invalid workorder", result.errors));
     }
-    const workOrder = workOrderService.update(result.value);
-    sendJson(res, 201, req.requestId, workOrder);
+    const updatedWorkOrder = workOrderService.update(workOrder.id, result.value);
+    sendJson(res, 201, req.requestId, updatedWorkOrder);
 
+}
+
+export async function updateStatus(req,res, next){
+    const workOrder = await workOrderService.findById(req.params.id);
+    if(!workOrder) return next( new AppError(404, "NOT_FOUND", "Work order was not found"));
+
+    console.log("Current: " + workOrder.status + " Next: " + req.body.status)
+    const result = validateStatusChange(workOrder.status, req.body.status);
+    if (!result.ok){
+        return next( new AppError(409), "INVALID_TRANSITION", "invalid workorder status change", result.errors);
+    }
+
+    const updatedWorkOrder = workOrderService.updateStatus(workOrder.id, result.next);
+    sendJson(res, 201, req.requestId, updatedWorkOrder);
+
+}
+
+export async function deleteById(req, res, next) {
+    const workOrder = await workOrderService.findById(req.params.id);
+    if(!workOrder) return next( new AppError(404, "NOT_FOUND", "Work order was not found"));
+
+    workOrderService.delete(workOrder.id);
+    sendJson(res, 204);
+  
 }
 
 
 
 
 export async function bulkUpload(req, res, next, records) {
+  const size = req.file
   const resultCSV = isCSV(req.file.originalname);
   if (!resultCSV){
     return next( new AppError(415, "UNSUPPORTED_MEDIA_TYPE", "Must be a CSV file"))

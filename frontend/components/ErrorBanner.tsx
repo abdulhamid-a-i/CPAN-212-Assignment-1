@@ -1,6 +1,6 @@
 import React from "react";
 
-type ErrorBannerProps = {
+export type ErrorBannerProps = {
   error?: {
       requestId?: string;
       code: number
