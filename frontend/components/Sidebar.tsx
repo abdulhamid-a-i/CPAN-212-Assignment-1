@@ -9,7 +9,7 @@ export default function Sidebar(){
           <Link href="/workorders/create">+ Create</Link>
           <Link href="/dashboard">Dashboard</Link>
           <Link href="/workorders">Work Orders</Link>
-          <Link href="/bulk-upload">Bulk Upload</Link>
+          <Link href="/data-transfer">Bulk Upload</Link>
           <Link href="/help">Help</Link>
         </nav>
 

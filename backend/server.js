@@ -4,5 +4,5 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 app.listen(PORT, () => {
-  console.log(`IncidentTracker API running on http://localhost:${PORT}`);
+  console.log(`WorkOrderHub API running on http://localhost:${PORT}`);
 });

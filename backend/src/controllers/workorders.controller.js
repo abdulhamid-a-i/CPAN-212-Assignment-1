@@ -3,6 +3,8 @@ import { sendJson } from "../middleware/response.middleware.js";
 import { AppError } from "../utils/apperror.js";
 import { validateCreateWorkOrder, validateUpdate, validateStatusChange, isCSV } from "../utils/validators.js";
 import { createWorkOrder } from "../data/workorders.store.js";
+import { LIMITS } from "../../config.js";
+import { parseCsvBuffer } from "../utils/csv.js";
 
 export async function list(req,res){
     
@@ -75,8 +77,15 @@ export async function deleteById(req, res, next) {
 
 
 
-export async function bulkUpload(req, res, next, records) {
-  const size = req.file
+export async function bulkUpload(req, res, next) {
+    if(!req.file){
+    return next( new AppError(400, "VALIDATION_ERROR", "File cannot be null"));
+  }
+  if (req.file.buffer.length > LIMITS.MAX_CSV_BYTES){
+    return next(new AppError(413,"PAYLOAD_TOO_LARGE", "File size exceeds maximum allowed file size"));
+  }
+  const records = await parseCsvBuffer(req.file.buffer);
+  
   const resultCSV = isCSV(req.file.originalname);
   if (!resultCSV){
     return next( new AppError(415, "UNSUPPORTED_MEDIA_TYPE", "Must be a CSV file"))
