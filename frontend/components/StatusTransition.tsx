@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
-import InlineError from "./InlineError"; // if you have it
-// If you don't have InlineError working, replace with <p style={{color:"crimson"}}>...</p>
+import InlineError from "./InlineError";
+import { TRANSITIONS } from "../config";
 
 type WorkOrder = {
   id: string;
@@ -18,14 +18,7 @@ export default function StatusTransition({ workOrder, onUpdateStatus }: Props) {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  const allowedNext = useMemo(() => {
-    const cur = workOrder.status;
-    if (cur === "NEW") return ["NEW", "IN_PROGRESS"];
-    if (cur === "IN_PROGRESS") return ["IN_PROGRESS", "BLOCKED", "DONE"];
-    if (cur === "BLOCKED") return ["BLOCKED", "IN_PROGRESS"];
-    if (cur === "DONE") return ["DONE"];
-    return [cur];
-  }, [workOrder.status]);
+  const allowedNext = TRANSITIONS;
 
   async function save() {
     try {

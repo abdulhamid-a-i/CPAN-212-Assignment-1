@@ -1,14 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import { WorkOrder } from "../types/workorder";
 
-type WorkOrder = {
-  id: string;
-  title: string;
-  department: string;
-  priority: string;
-  status: string;
-  assignee?: string | null;
-};
+
 
 type Props = {
   items: WorkOrder[];
@@ -26,6 +20,7 @@ export default function WorkOrdersTable({ items, loading }: Props) {
           <th>Department</th>
           <th>Priority</th>
           <th>Status</th>
+          <th>Requester</th>
           <th>Assignee</th>
         </tr>
       </thead>
@@ -38,6 +33,7 @@ export default function WorkOrdersTable({ items, loading }: Props) {
             <td>{w.department}</td>
             <td>{w.priority}</td>
             <td>{w.status}</td>
+            <td>{w.requesterName}</td>
             <td>{w.assignee || "-"}</td>
           </tr>
         ))}

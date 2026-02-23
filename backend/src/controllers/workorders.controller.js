@@ -30,7 +30,7 @@ export async function create(req,res, next){
     if (!result.ok){
         return next( new AppError(400, "VALIDATION_ERROR", "invalid workorder", result.errors));
     }
-    const workOrder = workOrderService.create(result.value);
+    const workOrder = workOrderService.create(req.body);
     sendJson(res, 201, req.requestId, workOrder);
 
 }
@@ -101,7 +101,7 @@ export async function bulkUpload(req, res, next, records) {
       skipped++;
       continue
     }
-    await createWorkOrder(result.value);
+    await createWorkOrder(row);
     created++;
   }
   sendJson(res, 201, req.requestId, {

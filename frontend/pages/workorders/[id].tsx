@@ -59,6 +59,7 @@ export default function WorkOrderDetailsPage() {
       const updated = await changeWorkOrderStatus(workOrder.id, status);
       setWorkOrder(updated);
       setMessage("Status updated!");
+      load();
     } catch (e) {
 
       const details = Array.isArray(e.details) ? e.details.map((d) => JSON.stringify(d)).join(" | ") : "";
