@@ -1,7 +1,7 @@
 import { workOrderService } from "../services/workorders.service.js";
 import { sendJson } from "../middleware/response.middleware.js";
 import { AppError } from "../utils/apperror.js";
-import { validateCreateWorkOrder } from "../utils/validators.js";
+import { validateCreateWorkOrder, validateUpdate, validateStatusChange } from "../utils/validators.js";
 
 export async function list(req,res){
     
@@ -33,6 +33,18 @@ export async function create(req,res, next){
     sendJson(res, 201, req.requestId, workOrder);
 
 }
+
+export async function update(req,res, next){
+    const result = validateUpdate(req.body);
+    if (!result.ok){
+        return next( new AppError(400, "VALIDATION_ERROR", "invalid workorder", result.errors));
+    }
+    const workOrder = workOrderService.update(result.value);
+    sendJson(res, 201, req.requestId, workOrder);
+
+}
+
+
 
 
 export async function bulkUpload(req, res, next, records) {
