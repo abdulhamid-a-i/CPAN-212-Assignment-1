@@ -24,6 +24,7 @@ async function handleJson(res) {
     const err = new Error(body.error.message);
     err.status = res.status;
     err.details = details;
+    err.requestId = body?.requestId;
     throw err;
   }
 

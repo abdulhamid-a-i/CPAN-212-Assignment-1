@@ -44,11 +44,14 @@ export default function BulkUpload() {
       setResult(data);
       setReqId(data.requestId);
     } catch (e: any) {
+      const error = e.message;
+      console.log(error, e.requestId);
       setErr({
-        requestId: reqId,
-        message: e.message || "Something went wrong."
+        requestId: e?.requestId,
+        message: e?.message || "Something went wrong."
       });
     } finally {
+      console.log(err);
       setUploading(false);
     }
   }
@@ -57,9 +60,8 @@ export default function BulkUpload() {
     <Layout title="Bulk Upload">
       <div className="panel">
       <Topbar title="Upload CSV">
-        
-      <ErrorBanner error={err} />
       </Topbar>
+      <ErrorBanner error={err}/>
       
 
       <div className="info">
