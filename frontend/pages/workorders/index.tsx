@@ -35,18 +35,10 @@ export default function WorkOrdersPage() {
         limit: filters.limit,
       });
 
-      // Support both formats:
-      // 1) Array
-      // 2) { items, page, limit, total }
-      const list = Array.isArray(data) ? data : Array.isArray(data?.items) ? data.items : [];
-      setWorkOrders(list);
-
-      const t = typeof data?.total === "number" ? data.total : list.length;
-      setTotal(t);
+      setWorkOrders(Array.isArray(data.data.items) ? data.data.items : []);
+      setTotal(data.data.total)
     } catch (e) {
-      setError(e.message || "Failed to load work orders");
-      setWorkOrders([]);
-      setTotal(0);
+      setError(e.message);
     } finally {
       setLoading(false);
     }
@@ -89,7 +81,7 @@ export default function WorkOrdersPage() {
             <label className="field">
               <div className="field-label">Department</div>
               <select value={filters.department} onChange={(e) => setFilters((f) => ({ ...f, department: e.target.value, page: 1 }))}>
-                <option value="">All</option>
+                <option value=''>All</option>
                 <option value="FACILITIES">FACILITIES</option>
                 <option value="IT">IT</option>
                 <option value="SECURITY">SECURITY</option>
