@@ -1,5 +1,7 @@
 # CPAN-212-Assignment-1
 
+Team: Abdulhamid Weheliye (n01756626, Section A), Mbaye Fall (n01764121, Section A), Cheyenne Hunsley (N01747035, Section A), Bandanpreet Kaur Malhi (n01726650, Section A), Laura Sofia Santana Acosta (N01737339,Section B)
+
 ## Business Case Summary
 Internal operation requests in many organizations ofccure through fragmented and unstructured communication channels. This leads to the following inefficiencies:
 - Inconsistent request formats which need repeated clarification
