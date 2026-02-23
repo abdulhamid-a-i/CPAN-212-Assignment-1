@@ -16,6 +16,7 @@ export default function WorkOrdersPage() {
     department: "",
     priority: "",
     assignee: "",
+    q: "",          
     page: 1,
     limit: 10,
   });
@@ -45,6 +46,7 @@ export default function WorkOrdersPage() {
 
       const res = await listWorkOrders({
         status: filters.status || undefined,
+        q: (filters.q || "").trim() ? (filters.q || "").trim() : undefined,
         department: filters.department || undefined,
         priority: filters.priority || undefined,
         assignee: assignee ? assignee : undefined,
@@ -68,6 +70,7 @@ export default function WorkOrdersPage() {
   }, [
     filters.status,
     filters.department,
+    filters.q,
     filters.priority,
     filters.assignee,
     filters.page,

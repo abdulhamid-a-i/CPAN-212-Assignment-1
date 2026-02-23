@@ -18,6 +18,7 @@ export default function CreateWorkOrderPage() {
         description: values.description,
         department: values.department,
         priority: values.priority,
+        requesterName: values.requesterName,
         assignee: values.assignee ? values.assignee : null,
       });
 

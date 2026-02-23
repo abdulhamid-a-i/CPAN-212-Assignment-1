@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import ErrorBanner from "../../components/ErrorBanner";
 import WorkOrderForm from "../../components/WorkOrderForm";
-import { getWorkOrder, changeWorkOrderStatus, updateWorkOrder } from "../../services/api";
+import { getWorkOrder, changeWorkOrderStatus, updateWorkOrder, deleteWorkOrder } from "../../services/api";
 
 export default function WorkOrderDetailsPage() {
   const router = useRouter();
@@ -100,6 +100,26 @@ export default function WorkOrderDetailsPage() {
 
       setError(details ? `${e.message}: ${details}` : e?.message || "Update failed");
       throw e; 
+    }
+  }
+
+  async function handleDelete() {
+    if (!workOrder) return;
+
+    const ok = confirm("Delete this work order? This cannot be undone.");
+    if (!ok) return;
+
+    try {
+      setError("");
+      setMessage("");
+
+      await deleteWorkOrder(workOrder.id);
+      router.push("/workorders");
+    } catch (e: any) {
+      const details = Array.isArray(e?.details)
+        ? e.details.map((d: any) => JSON.stringify(d)).join(" | ")
+        : "";
+      setError(details ? `${e.message}: ${details}` : e?.message || "Delete failed");
     }
   }
 
@@ -200,6 +220,11 @@ export default function WorkOrderDetailsPage() {
                   </button>
                 </>
               )}
+            </div>
+            <div style={{ marginTop: 20 }}>
+              <button className="btn btn-secondary" onClick={handleDelete}>
+                Delete Work Order
+              </button>
             </div>
           </div>
         )}

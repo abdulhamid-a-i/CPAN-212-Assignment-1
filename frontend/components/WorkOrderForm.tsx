@@ -7,6 +7,7 @@ type WorkOrderFormValues = {
   description: string;
   department: string;
   priority: string;
+  requesterName: string;
   assignee: string;
 };
 
@@ -28,12 +29,13 @@ export default function WorkOrderForm({
   disabled,
 }: Props) {
   const [values, setValues] = useState<WorkOrderFormValues>({
-    title: initialValues?.title ?? "",
-    description: initialValues?.description ?? "",
-    department: initialValues?.department ?? "",
-    priority: initialValues?.priority ?? "",
-    assignee: initialValues?.assignee ?? "",
-  });
+  title: initialValues?.title ?? "",
+  description: initialValues?.description ?? "",
+  department: initialValues?.department ?? "",
+  priority: initialValues?.priority ?? "",
+  requesterName: initialValues?.requesterName ?? "",  
+  assignee: initialValues?.assignee ?? "",
+});
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
@@ -50,7 +52,12 @@ export default function WorkOrderForm({
       e.description = "Description must be at least 10 characters.";
     }
 
-    // Department is only required on create (matches backend validateUpdate)
+    if (mode === "create") {
+        if (!values.requesterName || values.requesterName.trim().length < 3) {
+        e.requesterName = "Requester name must be at least 3 characters.";
+        }
+    }
+    
     if (mode === "create") {
       if (!values.department) e.department = "Please select a department.";
       else if (!ENUMS.DEPARTMENTS.includes(values.department)) {
@@ -83,15 +90,15 @@ export default function WorkOrderForm({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // Touch all fields so errors show
+    
     setTouched({
-      title: true,
-      description: true,
-      department: true,
-      priority: true,
-      assignee: true,
+    title: true,
+    description: true,
+    department: true,
+    priority: true,
+    requesterName: true, 
+    assignee: true,
     });
-
     setFormError("");
 
     if (hasErrors) return;
@@ -99,13 +106,13 @@ export default function WorkOrderForm({
     try {
       setSaving(true);
 
-      // Backend treats assignee as optional/null; send empty string as null-ish
       const payload: WorkOrderFormValues = {
         ...values,
         title: values.title.trim(),
         description: values.description.trim(),
+        requesterName: values.requesterName.trim(), // ✅ add
         assignee: values.assignee.trim(),
-      };
+        };
 
       await onSubmit(payload);
     } catch (err: any) {
@@ -134,6 +141,20 @@ export default function WorkOrderForm({
         {touched.title && <InlineError message={errors.title} />}
       </label>
 
+        {mode === "create" ? (
+        <label className="field">
+            <div className="field-label">Requester Name</div>
+            <input
+            value={values.requesterName}
+            onChange={(e) => setField("requesterName", e.target.value)}
+            onBlur={() => markTouched("requesterName")}
+            placeholder="e.g. Cheyenne"
+            disabled={disabled || saving}
+            />
+            {touched.requesterName && <InlineError message={errors.requesterName} />}
+        </label>
+        ) : null}
+
       <label className="field">
         <div className="field-label">Description</div>
         <textarea
@@ -147,7 +168,7 @@ export default function WorkOrderForm({
         {touched.description && <InlineError message={errors.description} />}
       </label>
 
-      {/* Department is create-only based on backend validation */}
+      
       {mode === "create" ? (
         <label className="field">
           <div className="field-label">Department</div>
