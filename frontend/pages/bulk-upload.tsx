@@ -5,6 +5,7 @@ import { bulkUploadCsv } from "../services/api";
 import CsvUpload from "../components/CsvUpload";
 import Layout from "../components/Layout";
 import UploadResult from "../components/UploadResult";
+import Topbar from "../components/Topbar";
 
 type UploadResult = {
   totalRows: number;
@@ -54,9 +55,12 @@ export default function BulkUpload() {
 
   return (
     <Layout title="Bulk Upload">
-      <div className="container">
-      <h1>Upload CSV</h1>
+      <div className="panel">
+      <Topbar title="Upload CSV">
+        
       <ErrorBanner error={err} />
+      </Topbar>
+      
 
       <div className="info">
         Required headers: <code>title,description,department,priority,requesterName,assignee</code>
