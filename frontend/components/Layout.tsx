@@ -1,25 +1,13 @@
-import Link from "next/link";
+import { ReactNode } from "react";
 
-export default function Layout({ title, children }) {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <div className="layout">
-      <aside className="sidebar">
-        <div className="brand">IncidentTracker</div>
-
-        <nav className="nav">
-          <Link href="/workorders/create">+ Create</Link>
-          <Link href="/dashboard">Dashboard</Link>
-          <Link href="/workorders">Work Orders</Link>
-          <Link href="/bulk-upload">Bulk Upload</Link>
-        </nav>
-      </aside>
-
-      <main className="main">
-        <div className="container">
-          <h1 className="pageTitle">{title}</h1>
-          {children}
-        </div>
-      </main>
+      {children}
     </div>
   );
 }
