@@ -30,11 +30,13 @@ export default function Dashboard() {
         limit: 200,
       });
 
+      const payload = data.data;
+
       // Supports both formats:
       // 1) Array
       // 2) { items, page, limit, total }
-      const list = Array.isArray(data) ? data : Array.isArray(data?.items) ? data.items : [];
-      setItems(list);
+
+      setItems(Array.isArray(payload.items) ? payload.items : []);
     } catch (e) {
       setErr(e.message || "Failed to load work orders");
       setItems([]);
