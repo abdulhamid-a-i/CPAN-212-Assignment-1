@@ -1,41 +1,5 @@
 [
   {
-    "id": "c455f475-e024-4047-950e-f2c43a19f1ae",
-    "title": "Test Patch",
-    "description": "Test work order 02",
-    "department": "IT",
-    "priority": "HIGH",
-    "requesterName": "John Doe",
-    "assignee": null,
-    "status": "DONE",
-    "createdAt": "2026-02-23T15:43:28.870Z",
-    "updatedAt": "2026-02-23T16:38:06.782Z"
-  },
-  {
-    "id": "550f1199-27e3-42df-911a-191e3ea63a5d",
-    "title": "Computer parts",
-    "description": "This is a detailed description for work order 1.",
-    "department": "IT",
-    "priority": "LOW",
-    "requesterName": "Tim Allen",
-    "assignee": "Assignee 1",
-    "status": "IN_PROGRESS",
-    "createdAt": "2026-02-23T15:53:01.290Z",
-    "updatedAt": "2026-02-23T17:03:56.924Z"
-  },
-  {
-    "id": "a0b9b248-c811-49d8-b8d1-b28003db5072",
-    "title": "Work Order Title 2",
-    "description": "This is a detailed description for work order 2.",
-    "department": "OTHER",
-    "priority": "MEDIUM",
-    "requesterName": "John Doe",
-    "assignee": "",
-    "status": "BLOCKED",
-    "createdAt": "2026-02-23T15:53:01.294Z",
-    "updatedAt": "2026-02-23T15:54:04.528Z"
-  },
-  {
     "id": "6e87444a-66a0-4037-9d61-2e89b5093c73",
     "title": "Work Order Title 3",
     "description": "This is a detailed description for work order 3.",
@@ -60,18 +24,6 @@
     "updatedAt": "2026-02-23T15:53:01.300Z"
   },
   {
-    "id": "c8ec90cf-cbcb-43fb-b2aa-6585b99a1519",
-    "title": "Work Order Title 8",
-    "description": "This is a detailed description for work order 8.",
-    "department": "FACILITIES",
-    "priority": "LOW",
-    "requesterName": "Requester 8",
-    "assignee": "",
-    "status": "NEW",
-    "createdAt": "2026-02-23T15:53:01.304Z",
-    "updatedAt": "2026-02-23T15:53:01.304Z"
-  },
-  {
     "id": "133bc0fd-12b0-4b76-b0e2-94022e729d20",
     "title": "Postman Work Order 1",
     "description": "This is a detailed description for work order 1.",
@@ -82,18 +34,6 @@
     "status": "NEW",
     "createdAt": "2026-02-23T15:57:18.168Z",
     "updatedAt": "2026-02-23T15:57:18.168Z"
-  },
-  {
-    "id": "846b69a5-721c-4839-81aa-7c4d20f2b8f6",
-    "title": "Work Order Title 2",
-    "description": "This is a detailed description for work order 2.",
-    "department": "OTHER",
-    "priority": "MEDIUM",
-    "requesterName": "Postman",
-    "assignee": "",
-    "status": "NEW",
-    "createdAt": "2026-02-23T15:57:18.173Z",
-    "updatedAt": "2026-02-23T15:57:18.173Z"
   },
   {
     "id": "3ab33670-0151-467b-a768-e0866de971f8",

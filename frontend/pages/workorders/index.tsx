@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import ErrorBanner from "../../components/ErrorBanner";
-import { listWorkOrders } from "../../services/api";
+import { deleteWorkOrder, listWorkOrders } from "../../services/api";
 import WorkOrdersTable from "../../components/WorkOrdersTable";
 import FilterBar from "../../components/FilterBar";
 
@@ -10,6 +10,15 @@ export default function WorkOrdersPage() {
   const [workOrders, setWorkOrders] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+
+    const handleDelete = async(data) => {
+          console.log(data)
+            try {const res = await deleteWorkOrder(data);
+            load();
+            } catch(err){
+              setError(err.message);
+            }
+    }
 
     const handleReset = (data) => {
     console.log("Reset: ", data)
@@ -84,7 +93,7 @@ export default function WorkOrdersPage() {
 
         {!loading && !error && (
           <>
-          <WorkOrdersTable items={workOrders} loading={loading}/>
+          <WorkOrdersTable items={workOrders} loading={loading} onLoad={handleDelete}/>
           
             {/* Pagination */}
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12 }}>

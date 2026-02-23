@@ -1,15 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import { WorkOrder } from "../types/workorder";
+import { deleteWorkOrder } from "../services/api";
+import InlineError from "./InlineError";
 
 
 
 type Props = {
   items: WorkOrder[];
   loading?: boolean;
+  onLoad: any;
 };
 
-export default function WorkOrdersTable({ items, loading }: Props) {
+export default function WorkOrdersTable({ items, loading, onLoad}: Props) {
+
   if (loading) return <p>Loading...</p>;
   
 
@@ -37,6 +41,9 @@ export default function WorkOrdersTable({ items, loading }: Props) {
             <td>{w.status}</td>
             <td>{w.requesterName}</td>
             <td>{w.assignee || "-"}</td>
+            <td>
+              <button value={w.id} onClick={(e)=> onLoad(e.currentTarget.value)}>Delete</button>
+            </td>
           </tr>
         ))}
         {items.length === 0 && (
