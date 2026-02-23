@@ -23,13 +23,21 @@ export default function WorkOrdersPage() {
             }
     }
 
-    const handleReset = (data) => {
-    console.log("Reset: ", data)
-    setFilters(data);
-    load()
+     const handleReset = () => {
+       const data= {status:"",
+      department:"",
+      priority:"",
+      assignee:"",
+      q:"",
+      page:1,
+      limit:10
+    
   }
-
-    const onHandleChange = (data) => {
+    setFilters(data);
+     load()
+    
+  }
+ const onHandleChange = (data) => {
       console.log("change: ", data)
     setFilters(data);
     load();

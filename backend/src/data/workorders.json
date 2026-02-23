@@ -192,27 +192,15 @@
     "updatedAt": "2026-02-23T18:26:12.930Z"
   },
   {
-    "id": "8062455f-65dd-497c-9f7c-80bfbe9eeafd",
-    "title": "Work Order Title 3",
-    "description": "This is a detailed description for work order 3.",
-    "department": "SAFETY",
+    "id": "52dad943-3d16-494c-a9fe-10a25ad7c905",
+    "title": "Repair Security camera",
+    "description": "Security camera down in section C.",
+    "department": "IT",
     "priority": "MEDIUM",
-    "requesterName": "Requester 3",
-    "assignee": "Assignee 3",
-    "status": "NEW",
-    "createdAt": "2026-02-23T18:26:12.932Z",
-    "updatedAt": "2026-02-23T18:26:12.932Z"
-  },
-  {
-    "id": "92c1d46b-97a9-4016-bb78-4fce4a4f9ee6",
-    "title": "Work Order Title 4",
-    "description": "This is a detailed description for work order 4.",
-    "department": "FACILITIES",
-    "priority": "HIGH",
-    "requesterName": "Mark Brandon",
-    "assignee": "",
-    "status": "NEW",
-    "createdAt": "2026-02-23T18:26:12.935Z",
-    "updatedAt": "2026-02-23T18:26:12.935Z"
+    "requesterName": "Alex",
+    "assignee": "Tom",
+    "status": "DONE",
+    "createdAt": "2026-02-23T20:00:48.896Z",
+    "updatedAt": "2026-02-23T20:01:10.109Z"
   }
 ]
