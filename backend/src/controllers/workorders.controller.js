@@ -1,7 +1,7 @@
 import { workOrderService } from "../services/workorders.service.js";
 import { sendJson } from "../middleware/response.middleware.js";
 import { AppError } from "../utils/apperror.js";
-import { validateCreateWorkOrder, validateUpdate, validateStatusChange } from "../utils/validators.js";
+import { validateCreateWorkOrder, validateUpdate, validateStatusChange, isCSV } from "../utils/validators.js";
 import { createWorkOrder } from "../data/workorders.store.js";
 
 export async function list(req,res){
@@ -49,6 +49,10 @@ export async function update(req,res, next){
 
 
 export async function bulkUpload(req, res, next, records) {
+  const resultCSV = isCSV(req.file.originalname);
+  if (!resultCSV){
+    return next( new AppError(415, "UNSUPPORTED_MEDIA_TYPE", "Must be a CSV file"))
+  }
       const errors = []
 
   let i = 0;

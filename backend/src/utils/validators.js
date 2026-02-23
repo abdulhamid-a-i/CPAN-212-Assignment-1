@@ -2,7 +2,7 @@ import { ENUMS } from "../../config.js";
 
 
 export function isCSV(filename) {
-    return typeof filename === "string" && /\.csv/.test(filename.trim());
+    return typeof filename === "string" && /\.csv$/i.test(filename.trim());
 }
 
 
