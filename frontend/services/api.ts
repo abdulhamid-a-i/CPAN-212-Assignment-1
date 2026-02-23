@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../config";
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE_URL || API_BASE_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY || ""
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 const HEADERS_JSON = {
   "x-api-key": API_KEY,
   "Content-Type": "application/json"
@@ -11,7 +11,7 @@ const HEADERS_BULK = {
   "x-api-key": API_KEY,
 }
 
-async function handleJson(res: Response) {
+async function handleJson(res) {
   const contentType = res.headers.get("content-type") || "";
   const isJson = contentType.includes("application/json");
   const body = isJson ? await res.json() : null;
@@ -20,18 +20,18 @@ async function handleJson(res: Response) {
     const message =
       (body && (body.error || body.message)) ||
       `Request failed with status ${res.status}`;
-    const details = body && (body as any).error && (body as any).error.details ? (body as any).error.details : null;
-    const err: any = new Error(((body as any)?.error?.message) || message);
+    const details = body && body.error.details ? body.error.details : null;
+    const err = new Error(body.error.message);
     err.status = res.status;
     err.details = details;
     throw err;
   }
 
-  return body && body.data ? body.data : body;
+  return body;
 }
 
 
-export async function bulkUploadCsv(file: File) {
+export async function bulkUploadCsv(file) {
   const fd = new FormData();
   fd.append("file", file);
 
@@ -40,7 +40,7 @@ export async function bulkUploadCsv(file: File) {
     headers:HEADERS_BULK,
     body: fd
   });
-
+  
   return handleJson(res);
 }
 

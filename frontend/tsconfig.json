@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/dashboard.js", "pages/workorders/[id].js", "pages/workorders/index.js"  ],
+, "pages/dashboard.tsx", "pages/workorders/[id].tsx", "pages/workorders/index.tsx"  ],
   "exclude": [
     "node_modules"
   ]
