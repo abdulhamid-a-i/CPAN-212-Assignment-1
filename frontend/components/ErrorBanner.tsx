@@ -2,8 +2,11 @@ import React from "react";
 
 type ErrorBannerProps = {
   error?: {
-    message: string;
     requestId?: string;
+      code: number
+      message: string;
+      details: string[];
+
   } | null;
 };
 

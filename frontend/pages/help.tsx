@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 
 export default function Help() {
   return (
-    <Layout>
+    <Layout title="Help Page">
       <div className="container">
         <h1>CSV Upload Help</h1>
 

@@ -11,6 +11,7 @@ export default function Layout({ title, children }) {
           <Link href="/dashboard">Dashboard</Link>
           <Link href="/workorders">Work Orders</Link>
           <Link href="/bulk-upload">Bulk Upload</Link>
+          <Link href="/help">Help</Link>
         </nav>
       </aside>
 

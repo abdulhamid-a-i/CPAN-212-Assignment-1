@@ -13,9 +13,9 @@ async function handleJson(res) {
       (body && (body.error || body.message)) ||
       `Request failed with status ${res.status}`;
     const details = body && body.error.details ? body.details : null;
-    const err = new Error(message);
+    const err = new Error(body.error.message);
     err.status = res.status;
-    err.details = details;
+    err.details = body.error.details;
     throw err;
   }
 
