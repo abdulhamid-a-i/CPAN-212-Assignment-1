@@ -33,7 +33,8 @@ export async function create(req,res, next){
     if (!result.ok){
         return next( new AppError(400, "VALIDATION_ERROR", "invalid workorder", result.errors));
     }
-    const workOrder = workOrderService.create(req.body);
+    const workOrder = await workOrderService.create(req.body);
+    console.log(workOrder);
     sendJson(res, 201, req.requestId, workOrder);
 
 }
@@ -46,7 +47,7 @@ export async function update(req,res, next){
     if (!result.ok){
         return next( new AppError(400, "VALIDATION_ERROR", "invalid workorder", result.errors));
     }
-    const updatedWorkOrder = workOrderService.update(workOrder.id, result.value);
+    const updatedWorkOrder = workOrderService.update(workOrder.id, req.body);
     sendJson(res, 201, req.requestId, updatedWorkOrder);
 
 }

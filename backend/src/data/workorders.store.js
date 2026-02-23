@@ -31,6 +31,7 @@ export async function updateWorkOrder(id, data){
     workOrders[idx].title = data.title;
     workOrders[idx].description = data.description;
     workOrders[idx].priority = data.priority;
+    workOrders[idx].assignee = data.assignee;
     workOrders[idx].updatedAt = new Date().toISOString();
     await writeIndex(workOrders);
     return workOrders[idx];

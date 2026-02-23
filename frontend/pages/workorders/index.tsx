@@ -12,7 +12,10 @@ export default function WorkOrdersPage() {
   const [loading, setLoading] = useState(true);
 
     const handleDelete = async(data) => {
-          console.log(data)
+          if (!data) return;
+          const ok = confirm("Delete this work order? This cannot be undone.");
+          if (!ok) return;
+          
             try {const res = await deleteWorkOrder(data);
             load();
             } catch(err){

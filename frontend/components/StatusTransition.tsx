@@ -18,7 +18,7 @@ export default function StatusTransition({ workOrder, onUpdateStatus }: Props) {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  const allowedNext = TRANSITIONS;
+   const allowedNext = TRANSITIONS[workOrder.status] || [];
 
   async function save() {
     try {

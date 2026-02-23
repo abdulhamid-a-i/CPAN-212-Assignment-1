@@ -40,7 +40,7 @@ export const workOrderService = {
             assignee: assignee ?? null
         }
 
-        return createWorkOrder(workOrder);
+        return await createWorkOrder(workOrder);
 
     },
 

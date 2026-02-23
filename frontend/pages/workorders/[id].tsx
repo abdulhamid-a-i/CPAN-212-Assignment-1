@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import ErrorBanner from "../../components/ErrorBanner";
-import { getWorkOrder, changeWorkOrderStatus } from "../../services/api";
+import WorkOrderForm from "../../components/WorkOrderForm";
+import { getWorkOrder, changeWorkOrderStatus, updateWorkOrder, deleteWorkOrder } from "../../services/api";
 
 export default function WorkOrderDetailsPage() {
   const router = useRouter();
@@ -19,12 +20,11 @@ export default function WorkOrderDetailsPage() {
   const allowedNext = useMemo(() => {
     if (!workOrder) return [];
     const cur = workOrder.status;
-
-    if (cur === "NEW") return ["NEW", "IN_PROGRESS"];
-    if (cur === "IN_PROGRESS") return ["IN_PROGRESS", "BLOCKED", "DONE"];
-    if (cur === "BLOCKED") return ["BLOCKED", "IN_PROGRESS"];
-    if (cur === "DONE") return ["DONE"]; 
-    return [cur];
+    if (cur === "NEW") return ["IN_PROGRESS"];
+    if (cur === "IN_PROGRESS") return ["BLOCKED", "DONE"];
+    if (cur === "BLOCKED") return ["IN_PROGRESS"];
+    if (cur === "DONE") return [];
+    return [];
   }, [workOrder]);
 
   async function load() {
@@ -34,11 +34,14 @@ export default function WorkOrderDetailsPage() {
       setError("");
       setMessage("");
 
-      const data = await getWorkOrder(id);
-      setWorkOrder(data.data);
-      setStatus(data.status);
-    } catch (e) {
-      setError(e.message || "Failed to load work order");
+      const res = await getWorkOrder(id as string);
+      const wo = res?.data; 
+      setWorkOrder(wo);
+
+
+      setStatus(wo?.status || "");
+    } catch (e: any) {
+      setError(e?.message || "Failed to load work order");
     } finally {
       setLoading(false);
     }
@@ -51,23 +54,77 @@ export default function WorkOrderDetailsPage() {
 
   async function save() {
     if (!workOrder) return;
+    if (!status) return;
     try {
       setSaving(true);
       setError("");
       setMessage("");
 
-      const updated = await changeWorkOrderStatus(workOrder.id, status);
-      setWorkOrder(updated);
+    await changeWorkOrderStatus(workOrder.id, status);
       setMessage("Status updated!");
-      load();
-    } catch (e) {
-
-      const details = Array.isArray(e.details) ? e.details.map((d) => JSON.stringify(d)).join(" | ") : "";
-      setError(details ? `${e.message}: ${details}` : e.message || "Update failed");
+      await load(); 
+    } catch (e: any) {
+      const details = Array.isArray(e?.details)
+        ? e.details.map((d: any) => JSON.stringify(d)).join(" | ")
+        : "";
+      setError(details ? `${e.message}: ${details}` : e?.message || "Update failed");
     } finally {
       setSaving(false);
     }
   }
+
+    async function handleEdit(values: any) {
+    if (!workOrder) return;
+
+    try {
+      setError("");
+      setMessage("");
+
+      await updateWorkOrder(workOrder.id, {
+        title: values.title,
+        description: values.description,
+        priority: values.priority,
+        assignee: values.assignee ? values.assignee : null,
+      });
+
+      setMessage("Work order updated!");
+      await load();
+    } catch (e: any) {
+      const details = Array.isArray(e?.details)
+        ? e.details.map((d: any) => JSON.stringify(d)).join(" | ")
+        : "";
+
+      setError(details ? `${e.message}: ${details}` : e?.message || "Update failed");
+      throw e; 
+    }
+  }
+
+  async function handleDelete() {
+    if (!workOrder) return;
+
+    const ok = confirm("Delete this work order? This cannot be undone.");
+    if (!ok) return;
+
+    try {
+      setError("");
+      setMessage("");
+
+      await deleteWorkOrder(workOrder.id);
+      router.push("/workorders");
+    } catch (e: any) {
+      const details = Array.isArray(e?.details)
+        ? e.details.map((d: any) => JSON.stringify(d)).join(" | ")
+        : "";
+      setError(details ? `${e.message}: ${details}` : e?.message || "Delete failed");
+    }
+  }
+
+  const statusChangeDisabled =
+    saving ||
+    !workOrder ||
+    !status ||
+    status === workOrder.status ||
+    workOrder.status === "DONE";
 
   return (
     <Layout title="Work Order Details">
@@ -81,38 +138,80 @@ export default function WorkOrderDetailsPage() {
 
         {!loading && workOrder && (
           <div>
-            <p><b>ID:</b> {workOrder.id}</p>
-            <p><b>Title:</b> {workOrder.title}</p>
-            <p><b>Description:</b> {workOrder.description || "-"}</p>
-            <p><b>Department:</b> {workOrder.department}</p>
-            <p><b>Priority:</b> {workOrder.priority}</p>
-            <p><b>Status:</b> {workOrder.status}</p>
-            <p><b>Assignee:</b> {workOrder.assignee || "-"}</p>
+            <p>
+              <b>ID:</b> {workOrder.id}
+            </p>
+            <p>
+              <b>Title:</b> {workOrder.title}
+            </p>
+            <p>
+              <b>Description:</b> {workOrder.description || "-"}
+            </p>
+            <p>
+              <b>Department:</b> {workOrder.department}
+            </p>
+            <p>
+              <b>Priority:</b> {workOrder.priority}
+            </p>
+            <p>
+              <b>Status:</b> {workOrder.status}
+            </p>
+            <p>
+              <b>Assignee:</b> {workOrder.assignee || "-"}
+            </p>
 
-            <div style={{ marginTop: 14 }}>
-              <label>
-                Change status:&nbsp;
-                <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                  {allowedNext.map((s) => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-              </label>
-
-              <button
-                style={{ marginLeft: 12 }}
-                disabled={saving || status === workOrder.status}
-                onClick={save}
-              >
-                {saving ? "Saving..." : "Update Status"}
-              </button>
+            <div style={{ marginTop: 20 }}>
+              <h2>Edit Work Order</h2>
+              <WorkOrderForm
+                mode="edit"
+                initialValues={{
+                  title: workOrder.title,
+                  description: workOrder.description,
+                  priority: workOrder.priority,
+                  assignee: workOrder.assignee || "",
+                }}
+                onSubmit={handleEdit}
+                submitLabel="Save Changes"
+              />
             </div>
 
-            {workOrder.status === "DONE" && (
-              <p style={{ marginTop: 10, color: "#666" }}>
-                DONE work orders cannot be moved to another status.
-              </p>
-            )}
+            <div style={{ marginTop: 14 }}>
+                           {workOrder.status === "DONE" ? (
+                <p style={{ marginTop: 10, color: "#666" }}>
+                  DONE work orders cannot be moved to another status.
+                </p>
+              ) : (
+                <>
+                  <label>
+                    Change status:&nbsp;
+                    <select
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value="">Select next status</option>
+                      {allowedNext.map((s: string) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <button
+                    style={{ marginLeft: 12 }}
+                    disabled={statusChangeDisabled}
+                    onClick={save}
+                  >
+                    {saving ? "Saving..." : "Update Status"}
+                  </button>
+                </>
+              )}
+            </div>
+            <div style={{ marginTop: 20 }}>
+              <button style={{backgroundColor: "#dc2626"}} onClick={handleDelete}>
+                Delete Work Order
+              </button>
+            </div>
           </div>
         )}
       </div>

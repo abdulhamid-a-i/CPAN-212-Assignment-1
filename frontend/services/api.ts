@@ -71,12 +71,33 @@ export async function getWorkOrder(id: string) {
 
   return handleJson(res);
 }
+export async function createWorkOrder(payload: any) {
+  const res = await fetch(`${BASE}/api/workorders`, {
+    method: "POST",
+    headers: HEADERS_JSON,
+    body: JSON.stringify(payload),
+  });
+  return handleJson(res);
+}
+
+export async function updateWorkOrder(id: string, payload: any) {
+  const res = await fetch(`${BASE}/api/workorders/${encodeURIComponent(id)}`, {
+    method: "PUT",
+    headers: HEADERS_JSON,
+    body: JSON.stringify(payload),
+  });
+  return handleJson(res);
+}
 
 export async function deleteWorkOrder(id: string) {
-    const res = await fetch(`${BASE}/api/workorders/${encodeURIComponent(id)}`, {
+  const res = await fetch(`${BASE}/api/workorders/${encodeURIComponent(id)}`, {
     method: "DELETE",
     headers: HEADERS_JSON,
   });
+
+  if (res.status === 204) return null;
+
+  return handleJson(res);
 }
 
 export async function changeWorkOrderStatus(id: string, status: string) {
