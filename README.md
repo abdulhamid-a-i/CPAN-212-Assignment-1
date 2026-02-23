@@ -6,7 +6,7 @@ Team: Abdulhamid Weheliye (n01756626, Section A), Mbaye Fall (n01764121, Section
 Internal operation requests in many organizations ofccure through fragmented and unstructured communication channels. This leads to the following inefficiencies:
 - Inconsistent request formats which need repeated clarification
 - Duplicate or lost requests due to visibility issues
-- Uncontrolled progression tracking (WIP)
+- Uncontrolled progression/Work-in-progress tracking (WIP)
 - Unclear ownership and accountability
 - Tracibility and auditability issues
 - Unable to measure operational performance and/or limitations
