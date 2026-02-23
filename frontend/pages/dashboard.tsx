@@ -18,17 +18,14 @@ export default function Dashboard() {
   });
 
   const handleReset = (data) => {
-    console.log("Reset: ", data)
     setFilters(data);
   }
 
     const onHandleChange = (data) => {
-      console.log("change: ", data)
     setFilters(data);
   }
 
     const handleLoad = () => {
-      console.log("loading")
     load();
   }
 
