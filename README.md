@@ -8,7 +8,8 @@
 
 
 ## Setup Instructions
-Run app-stat.bat
+Run app-start.bat
+
 
 ## API Documentation:
 
@@ -28,7 +29,7 @@ and returns work orders that match provided filters and paginates using page and
 
 ### /api/workorders/:id Endpoint:
 
-#### PUT
+#### PUT:
 
 
 ## CSV Template:

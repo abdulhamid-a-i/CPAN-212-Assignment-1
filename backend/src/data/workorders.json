@@ -12,18 +12,6 @@
     "updatedAt": "2026-02-23T18:25:53.216Z"
   },
   {
-    "id": "133bc0fd-12b0-4b76-b0e2-94022e729d20",
-    "title": "Abdulhamid Work Order 1",
-    "description": "Test update through front end",
-    "department": "IT",
-    "priority": "MEDIUM",
-    "requesterName": "Requester 1",
-    "assignee": "Brad",
-    "status": "DONE",
-    "createdAt": "2026-02-23T15:57:18.168Z",
-    "updatedAt": "2026-02-23T19:41:02.944Z"
-  },
-  {
     "id": "3ab33670-0151-467b-a768-e0866de971f8",
     "title": "Postman Work Order 3",
     "description": "This is a detailed description for work order 3.",
@@ -202,5 +190,65 @@
     "status": "DONE",
     "createdAt": "2026-02-23T20:00:48.896Z",
     "updatedAt": "2026-02-23T20:01:10.109Z"
+  },
+  {
+    "id": "9fbfb16e-98e3-4380-854a-1bae6b05b987",
+    "title": "Computer parts",
+    "description": "This is a detailed description for work order 1.",
+    "department": "IT",
+    "priority": "LOW",
+    "requesterName": "Tim Allen",
+    "assignee": "Assignee 1",
+    "status": "NEW",
+    "createdAt": "2026-02-23T20:20:59.591Z",
+    "updatedAt": "2026-02-23T20:20:59.591Z"
+  },
+  {
+    "id": "b40ebce6-a6a8-4fa4-aa46-b4903bd80b3f",
+    "title": "Work Order Title 2",
+    "description": "This is a detailed description for work order 2.",
+    "department": "OTHER",
+    "priority": "MEDIUM",
+    "requesterName": "John Doe",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-23T20:20:59.594Z",
+    "updatedAt": "2026-02-23T20:20:59.594Z"
+  },
+  {
+    "id": "6906e294-c1af-4e83-b863-a4d064cd4a39",
+    "title": "Work Order Title 3",
+    "description": "This is a detailed description for work order 3.",
+    "department": "SAFETY",
+    "priority": "MEDIUM",
+    "requesterName": "Requester 3",
+    "assignee": "Assignee 3",
+    "status": "NEW",
+    "createdAt": "2026-02-23T20:20:59.597Z",
+    "updatedAt": "2026-02-23T20:20:59.597Z"
+  },
+  {
+    "id": "dde0be48-cd9c-4b35-a10d-a238ec259210",
+    "title": "Work Order Title 4",
+    "description": "This is a detailed description for work order 4.",
+    "department": "FACILITIES",
+    "priority": "HIGH",
+    "requesterName": "Mark Brandon",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-23T20:20:59.600Z",
+    "updatedAt": "2026-02-23T20:20:59.600Z"
+  },
+  {
+    "id": "34f820e7-cb76-4177-b33c-0ccf41f52ce7",
+    "title": "Work Order Title 8",
+    "description": "This is a detailed description for work order 8.",
+    "department": "FACILITIES",
+    "priority": "LOW",
+    "requesterName": "Requester 8",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-23T20:20:59.602Z",
+    "updatedAt": "2026-02-23T20:20:59.602Z"
   }
 ]
