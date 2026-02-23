@@ -72,6 +72,13 @@ export async function getWorkOrder(id: string) {
   return handleJson(res);
 }
 
+export async function deleteWorkOrder(id: string) {
+    const res = await fetch(`${BASE}/api/workorders/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+    headers: HEADERS_JSON,
+  });
+}
+
 export async function changeWorkOrderStatus(id: string, status: string) {
   const res = await fetch(`${BASE}/api/workorders/${encodeURIComponent(id)}/status`, {
     method: "PATCH",

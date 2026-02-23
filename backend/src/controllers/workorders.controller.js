@@ -8,12 +8,13 @@ import { parseCsvBuffer } from "../utils/csv.js";
 
 export async function list(req,res){
     
-      const {status, department, priority, assignee, page, limit} = req.query;
+      const {status, department, priority, assignee, page, limit, q} = req.query;
       const workOrders = await workOrderService.list({
         status: status || null,
         department: department || null,
         priority: priority || null,
         assignee: assignee || null,
+        q: q || null,
         page: parseInt(page) || 1,
         limit: parseInt(limit) || 10,
       })

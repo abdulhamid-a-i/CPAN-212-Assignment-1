@@ -3,14 +3,15 @@ import { createWorkOrder, deleteById, findById, listAll, updateStatus, updateWor
 export const workOrderService = {
     async list(filters){
         const workOrders = await listAll();
-        const {status, department, priority, assignee, page, limit} = filters ?? {};
+        const {q, status, department, priority, assignee, page, limit} = filters ?? {};
         
         const filteredWorkOrders = workOrders.filter((w) => {
             const okStatus = status ? w.status === status : true;
             const okDepartment = department ? w.department === department : true;
             const okPriority = priority ? w.priority === priority : true;
-            const okAssignee = assignee ? w.assignee === assignee : true;
-            return okStatus && okDepartment && okPriority && okAssignee;
+            const okTitle = q ? w.title?.toLowerCase().includes(q.toLowerCase()) : true;
+            const okAssignee = assignee ? w.assignee?.toLowerCase().includes(assignee.toLowerCase()) : true;
+            return okStatus && okDepartment && okPriority && okAssignee && okTitle;
         })
 
         const offset = (page - 1) * limit;

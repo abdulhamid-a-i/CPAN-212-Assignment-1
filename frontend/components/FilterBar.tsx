@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-export default function FilterBar({filters, onChange, onApply, onReset, title}) {
+export default function FilterBar({filters, onChange, onReset, title}) {
   return (
     <div className="panel" style={{ marginBottom: 12 }}>
       <div className="panel-title">{title}</div>
@@ -86,13 +86,9 @@ export default function FilterBar({filters, onChange, onApply, onReset, title}) 
             </label>
          
 
-          {(onApply || onReset) && (
+          {(onReset) && (
             <div style={{ display: "flex", alignItems: "end", gap: 8 }}>
-              {onApply && (
-                <button className="btn" onClick={onApply}>
-                  Apply
-                </button>
-              )}
+
               {onReset && (
                 <button className="btn btn-secondary" onClick={onReset}>
                   Reset

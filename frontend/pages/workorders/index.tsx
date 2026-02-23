@@ -14,15 +14,12 @@ export default function WorkOrdersPage() {
     const handleReset = (data) => {
     console.log("Reset: ", data)
     setFilters(data);
+    load()
   }
 
     const onHandleChange = (data) => {
       console.log("change: ", data)
     setFilters(data);
-  }
-
-    const handleLoad = () => {
-      console.log("loading")
     load();
   }
 
@@ -81,7 +78,7 @@ export default function WorkOrdersPage() {
 
         {/* Filters */}
         
-        <FilterBar filters={filters} title="Work Orders"onApply={handleLoad} onChange={onHandleChange} onReset={handleReset}/>
+        <FilterBar filters={filters} title="Work Orders" onChange={onHandleChange} onReset={handleReset}/>
 
         {loading && <p>Loading...</p>}
 

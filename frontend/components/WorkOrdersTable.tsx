@@ -11,6 +11,7 @@ type Props = {
 
 export default function WorkOrdersTable({ items, loading }: Props) {
   if (loading) return <p>Loading...</p>;
+  
 
   return (
     <table border={1} cellPadding={8} cellSpacing={0} width="100%">
@@ -22,6 +23,7 @@ export default function WorkOrdersTable({ items, loading }: Props) {
           <th>Status</th>
           <th>Requester</th>
           <th>Assignee</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>

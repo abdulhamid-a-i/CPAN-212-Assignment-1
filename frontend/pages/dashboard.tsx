@@ -11,18 +11,29 @@ export default function Dashboard() {
 
   // Visual management filters 
   const [filters, setFilters] = useState({
+    status: "",
     department: "",
     priority: "",
     assignee: "",
     q: "",
   });
 
-  const handleReset = (data) => {
+  const handleReset = () => {
+    const data= {status:"",
+      department:"",
+      priority:"",
+      assignee:"",
+      q:""
+    
+  }
     setFilters(data);
+     load()
+    
   }
 
     const onHandleChange = (data) => {
     setFilters(data);
+    
   }
 
     const handleLoad = () => {
@@ -46,10 +57,6 @@ export default function Dashboard() {
 
       const payload = data.data;
 
-      // Supports both formats:
-      // 1) Array
-      // 2) { items, page, limit, total }
-
       setItems(Array.isArray(payload.items) ? payload.items : []);
     } catch (e) {
       setErr(e.message || "Failed to load work orders");
@@ -61,7 +68,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     load();
-  }, [filters.department, filters.priority, filters.assignee, filters.q]);
+  }, [filters.status, filters.department, filters.priority, filters.assignee, filters.q]);
 
   const stats = useMemo(() => {
     const total = items.length;
@@ -78,7 +85,7 @@ export default function Dashboard() {
       <ErrorBanner message={err} />
 
       {/* Filters */}
-      <FilterBar filters={filters} title="Dashboard"onApply={handleLoad} onChange={onHandleChange} onReset={handleReset}/>
+      <FilterBar filters={filters} title="Dashboard"onChange={onHandleChange} onReset={handleReset}/>
 
       {/* KPIs */}
       <div className="kpis">
