@@ -2,6 +2,7 @@ import { workOrderService } from "../services/workorders.service.js";
 import { sendJson } from "../middleware/response.middleware.js";
 import { AppError } from "../utils/apperror.js";
 import { validateCreateWorkOrder, validateUpdate, validateStatusChange } from "../utils/validators.js";
+import { createWorkOrder } from "../data/workorders.store.js";
 
 export async function list(req,res){
     
@@ -49,17 +50,18 @@ export async function update(req,res, next){
 
 export async function bulkUpload(req, res, next, records) {
       const errors = []
-  
 
+  let i = 0;
   let created = 0;
   let skipped = 0;
 
   for (const row of records){
+    i++
     const result = validateCreateWorkOrder(row);
     if (!result.ok) {
-      result.errors.array.forEach(err => {
+      result.errors.forEach((err) => {
         errors.push({
-          row: row,
+          row: i,
           field: err.field,
           reason: err.reason
         })
@@ -67,7 +69,7 @@ export async function bulkUpload(req, res, next, records) {
       skipped++;
       continue
     }
-    await createWorkorder(result.value);
+    await createWorkOrder(result.value);
     created++;
   }
   sendJson(res, 201, req.requestId, {
@@ -75,7 +77,8 @@ export async function bulkUpload(req, res, next, records) {
     strategy: "PARTIAL_ACCEPTANCE",
     totalRows: records.length,
     accepted: created,
-    rejected: skipped
+    rejected: skipped,
+    errors: errors
   })
     
 }

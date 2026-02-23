@@ -31,7 +31,7 @@ export const workOrderService = {
     },
 
     async create({title, description, department, priority, requesterName, assignee}){
-    
+        console.log(assignee)
         const workOrder  = {
             title,
             description,

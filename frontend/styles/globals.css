@@ -290,7 +290,7 @@ table {
 }
 
 thead {
-  background-color: #3b82f6;
+  background-color: #ac1704;
   color: white;
 }
 
@@ -301,7 +301,7 @@ th, td {
 }
 
 tr:hover {
-  background-color: #e0f2fe;
+  background-color: #e23303;
   transition: 0.2s;
 }
 

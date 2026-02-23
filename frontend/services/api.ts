@@ -2,6 +2,14 @@ import { API_BASE_URL } from "../config";
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE_URL || API_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY
+const HEADERS_JSON = {
+  "x-api-key": API_KEY,
+  "Content-Type": "application/json"
+}
+
+const HEADERS_BULK = {
+  "x-api-key": API_KEY,
+}
 
 async function handleJson(res) {
   const contentType = res.headers.get("content-type") || "";
@@ -29,6 +37,7 @@ export async function bulkUploadCsv(file) {
 
   const res = await fetch(`${BASE}/api/workorders/bulk-upload`, {
     method: "POST",
+    headers:HEADERS_BULK,
     body: fd
   });
 

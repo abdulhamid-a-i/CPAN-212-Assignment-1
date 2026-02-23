@@ -26,7 +26,8 @@ export function validateCreateWorkOrder(body) {
         title: body.title,
         description: body.description,
         department: body.department,
-        priority: body.priority
+        priority: body.priority,
+        assignee: body.assignee ?? null
         }
     };
 }
@@ -52,7 +53,7 @@ export function validateUpdate(body){
         description: body.description,
         department: body.department,
         priority: body.priority,
-        assignee: body.assignee || null
+        assignee: body.assignee ?? null
         }
     };
 }

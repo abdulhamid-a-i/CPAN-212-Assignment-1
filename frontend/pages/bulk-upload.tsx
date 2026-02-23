@@ -4,6 +4,7 @@ import ErrorBanner from "../components/ErrorBanner";
 import { bulkUploadCsv } from "../services/api";
 import CsvUpload from "../components/CsvUpload";
 import Layout from "../components/Layout";
+import UploadResult from "../components/UploadResult";
 
 type UploadResult = {
   totalRows: number;
@@ -53,7 +54,7 @@ export default function BulkUpload() {
   return (
     <Layout title="Bulk Upload">
       <div className="container">
-      <h1>Bulk Upload CSV</h1>
+      <h1>Upload CSV</h1>
       <ErrorBanner error={err} />
 
       <div className="info">
@@ -69,36 +70,7 @@ export default function BulkUpload() {
       </div>
 
       {result && (
-        <div className="result">
-          <h2>Result</h2>
-          <div>
-            <div><strong>Total Rows:</strong> {result.totalRows}</div>
-            <div><strong>Created:</strong> {result.created}</div>
-            <div><strong>Skipped:</strong> {result.skipped}</div>
-          </div>
-
-          {Array.isArray(result.rowErrors) && result.rowErrors.length > 0 && (
-            <>
-              <h3>Skipped Row Errors</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Row</th>
-                    <th>Errors</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {result.rowErrors.map((r, idx) => (
-                    <tr key={idx}>
-                      <td>{r.row}</td>
-                      <td>{(r.errors || []).join(", ")}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </>
-          )}
-        </div>
+        <UploadResult result={result}/>
       )}
     </div>
     </Layout>
