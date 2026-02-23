@@ -137,7 +137,7 @@ export default function Dashboard() {
         <div className="kpi"><div className="kpi-label">High Priority</div><div className="kpi-value">{stats.high}</div></div>
       </div>
 
-      {/* 4 columns required */}
+     
       <div className="grid4">
         <StatusColumn title="NEW" items={items.filter((x) => x.status === "NEW")} />
         <StatusColumn title="IN_PROGRESS" items={items.filter((x) => x.status === "IN_PROGRESS")} />
