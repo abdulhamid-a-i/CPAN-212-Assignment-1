@@ -1,4 +1,4 @@
-import { createWorkOrder, findById, listAll } from "../data/workorders.store"
+import { createWorkOrder, findById, listAll, updateWorkOrder } from "../data/workorders.store.js"
 import crypto from 'crypto';
 
 
@@ -31,20 +31,35 @@ export const workOrderService = {
     },
 
     async create({title, description, department, priority, requesterName, assignee}){
-        const id = crypto.randomUUID;
-
-
+    
         const workOrder  = {
-            id,
             title,
             description,
             department,
             priority,
             requesterName,
-            assignee: assignee ?? ' '
+            assignee: assignee ?? null
         }
 
         return createWorkOrder(workOrder);
 
+    },
+
+    async update(id, {title,description,priority,assignee}){
+
+        const data = {
+            title,
+            description,
+            priority,
+            assignee: assignee
+        }
+
+        return updateWorkOrder(id, data);
+
+    },
+    async delete(id){
+
+
     }
+
 }

@@ -14,13 +14,13 @@ export async function findById(id) {
 export async function createWorkOrder(data) {
   const workOrders = await readIndex();
   const workOrder = {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     ...data,
     status: "NEW",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };
-  incidents.push(workOrder);
+  workOrders.push(workOrder);
   await writeIndex(workOrders);
   return workOrder;
 }
@@ -39,7 +39,7 @@ export async function updateWorkOrder(id, data){
 export async function updateStatus(id, status){
     const workOrders = await readIndex();
     const idx = workOrders.findIndex((i) => i.id === id);
-    
+
 }
 
   export async function deleteById(id){

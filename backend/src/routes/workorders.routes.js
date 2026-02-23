@@ -3,9 +3,11 @@ import multer from "multer";
 
 
 import { parseCsvBuffer } from "../utils/csv.js";
-import { validateCreateWorkOrder} from "../utils/validators.js";
+import { validateCreateWorkOrder, validateStatusChange} from "../utils/validators.js";
 import { sendJson } from "../middleware/response.middleware.js";
 import { AppError } from "../utils/apperror.js";
+import { bulkUpload, create, findById, list } from "../controllers/workorders.controller.js";
+import { authRequest } from "../middleware/auth.middleware.js";
 
 
 
@@ -15,14 +17,16 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.get("/", async (req, res, next) => {
   // Will accept parameters like dep (look at lab 2)
-
+  list(req, res);
 });
 
 router.get("/:id", async (req, res, next) => {
+  findById(req,res, next);
 
 });
 
 router.post("/", async (req, res, next) => {
+  create(req, res, next);
 
 });
 
@@ -31,40 +35,9 @@ router.patch("/:id/status", async (req, res, next) => {
 });
 
 router.post("/bulk-upload", upload.single("file"), async (req, res, next) => {
-  const errors = []
   const records = await parseCsvBuffer(req.file.buffer);
+  bulkUpload(req,res,next, records);
 
-  let created = 0;
-  let skipped = 0;
-
-  for (const row of records){
-    const result = validateCreateWorkOrder(row);
-    if (!result.ok) {
-      result.errors.array.forEach(err => {
-        errors.push({
-          row: row,
-          field: err.field,
-          reason: err.reason
-        })
-      });
-      skipped++;
-      continue
-    }
-    await createWorkorder(result.value);
-    created++;
-  }
-  sendJson(res, 201, req.requestId, {
-    uploadId: req.requestId,
-    strategy: "PARTIAL_ACCEPTANCE",
-    totalRows: records.length,
-    accepted: created,
-    rejected: skipped
-  })
-  /*res.json({
-    totalRows: records.length,
-    created,
-    skipped
-  });*/
 });
 
 export default router;

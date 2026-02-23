@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ddeac435-4be1-41a7-bc52-172c7cecfb8b",
+    "title": "Test WO #1",
+    "description": "Test work order 01",
+    "department": "IT",
+    "priority": "LOW",
+    "assignee": " ",
+    "status": "NEW",
+    "createdAt": "2026-02-23T01:10:39.742Z",
+    "updatedAt": "2026-02-23T01:10:39.742Z"
+  },
+  {
+    "id": "bdc3f4bb-5515-4482-898f-185da95f7f51",
+    "title": "Test WO #2",
+    "description": "Test work order 02",
+    "department": "IT",
+    "priority": "LOW",
+    "assignee": null,
+    "status": "NEW",
+    "createdAt": "2026-02-23T01:11:56.038Z",
+    "updatedAt": "2026-02-23T01:11:56.038Z"
+  }
+]
