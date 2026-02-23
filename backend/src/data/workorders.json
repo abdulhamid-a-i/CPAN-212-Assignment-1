@@ -64,5 +64,60 @@
     "status": "NEW",
     "createdAt": "2026-02-23T05:12:14.186Z",
     "updatedAt": "2026-02-23T05:12:14.186Z"
+  },
+  {
+    "id": "340dfaef-2bd9-4f04-b036-11c6cb79f8a2",
+    "title": "Work Order Title 1",
+    "description": "This is a detailed description for work order 1.",
+    "department": "IT",
+    "priority": "LOW",
+    "assignee": "Assignee 1",
+    "status": "NEW",
+    "createdAt": "2026-02-23T05:48:40.719Z",
+    "updatedAt": "2026-02-23T05:48:40.719Z"
+  },
+  {
+    "id": "4fb3c60b-ea8e-498f-917f-6dc2f7feb201",
+    "title": "Work Order Title 2",
+    "description": "This is a detailed description for work order 2.",
+    "department": "OTHER",
+    "priority": "MEDIUM",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-23T05:48:40.721Z",
+    "updatedAt": "2026-02-23T05:48:40.722Z"
+  },
+  {
+    "id": "cb076346-3b6d-4e19-ad18-b6dfbfa15cac",
+    "title": "Work Order Title 3",
+    "description": "This is a detailed description for work order 3.",
+    "department": "SAFETY",
+    "priority": "MEDIUM",
+    "assignee": "Assignee 3",
+    "status": "NEW",
+    "createdAt": "2026-02-23T05:48:40.725Z",
+    "updatedAt": "2026-02-23T05:48:40.725Z"
+  },
+  {
+    "id": "f73b4e6e-1538-4ec0-831b-97432c750b41",
+    "title": "Work Order Title 4",
+    "description": "This is a detailed description for work order 4.",
+    "department": "FACILITIES",
+    "priority": "HIGH",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-23T05:48:40.728Z",
+    "updatedAt": "2026-02-23T05:48:40.728Z"
+  },
+  {
+    "id": "5b98fcc8-70fd-418f-b8a3-d02d76655195",
+    "title": "Work Order Title 8",
+    "description": "This is a detailed description for work order 8.",
+    "department": "FACILITIES",
+    "priority": "LOW",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-23T05:48:40.731Z",
+    "updatedAt": "2026-02-23T05:48:40.731Z"
   }
 ]

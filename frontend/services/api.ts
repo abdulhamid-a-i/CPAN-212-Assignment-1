@@ -20,10 +20,10 @@ async function handleJson(res) {
     const message =
       (body && (body.error || body.message)) ||
       `Request failed with status ${res.status}`;
-    const details = body && body.error.details ? body.details : null;
+    const details = body && body.error.details ? body.error.details : null;
     const err = new Error(body.error.message);
     err.status = res.status;
-    err.details = body.error.details;
+    err.details = details;
     throw err;
   }
 

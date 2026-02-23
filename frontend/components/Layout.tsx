@@ -7,7 +7,7 @@ export default function Layout({ title, children }) {
         <div className="brand">Toyota Work Order Hub</div>
 
         <nav className="nav">
-          <Link href="/incidents/create">+ Create</Link>
+          <Link href="/workorders/create">+ Create</Link>
           <Link href="/dashboard">Dashboard</Link>
           <Link href="/workorders">Work Orders</Link>
           <Link href="/bulk-upload">Bulk Upload</Link>
