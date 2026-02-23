@@ -16,7 +16,9 @@ The solution is the development of Lean-inspired digital operational system whic
 This application applies the TPS principles by:
 - Providing a standardized request format
 - Rejecting invalid work orders at upload (All work orders are validated to ensure quality)
--
+- Providing a predefined work flow lifecycle that is enforced by the backend
+- Providing a dashboard, details page and work orders table to ensure visibility of status, priority, and ownership.
+- Providing clear and centralized error responses.
 
 
 ## Setup Instructions
@@ -68,10 +70,6 @@ Returns a 204 response.
 Sends a request to update status to the next allowed status. Backend validates the transition and rejects bad transition requests with a 409 error.
 
 Returns 201 on successful status updates with a structured response.
-
-
-
-
 
 
 ## CSV Template:
