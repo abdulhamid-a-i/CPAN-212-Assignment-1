@@ -41,6 +41,8 @@ Accepts query parameters:
 and returns work orders that match provided filters and paginates using page and limit filters.
 
 #### POST:
+Creates a new a new work order. Work order is validated and a 201 response is returned on success. 
+If there is a validation error a 400 response is sent along with a structured error response.
 
 
 ### /api/workorders/:id Endpoint:
