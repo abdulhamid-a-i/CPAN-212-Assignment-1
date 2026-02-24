@@ -34,7 +34,6 @@ export async function create(req,res, next){
         return next( new AppError(400, "VALIDATION_ERROR", "invalid workorder", result.errors));
     }
     const workOrder = await workOrderService.create(req.body);
-    console.log(workOrder);
     sendJson(res, 201, req.requestId, workOrder);
 
 }
@@ -59,7 +58,7 @@ export async function updateStatus(req,res, next){
     console.log("Current: " + workOrder.status + " Next: " + req.body.status)
     const result = validateStatusChange(workOrder.status, req.body.status);
     if (!result.ok){
-        return next( new AppError(409), "INVALID_TRANSITION", "invalid workorder status change", result.errors);
+        return next( new AppError(409, "INVALID_TRANSITION", `${workOrder.status} to ${req.body.status} is not a valid transition`, result.errors));
     }
 
     const updatedWorkOrder = workOrderService.updateStatus(workOrder.id, result.next);

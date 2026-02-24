@@ -6,10 +6,10 @@
     "department": "FACILITIES",
     "priority": "HIGH",
     "requesterName": "Mark Brandon",
-    "assignee": "",
-    "status": "IN_PROGRESS",
+    "assignee": null,
+    "status": "BLOCKED",
     "createdAt": "2026-02-23T15:53:01.300Z",
-    "updatedAt": "2026-02-23T23:14:25.780Z"
+    "updatedAt": "2026-02-24T01:42:55.856Z"
   },
   {
     "id": "3ab33670-0151-467b-a768-e0866de971f8",
@@ -216,18 +216,6 @@
     "updatedAt": "2026-02-23T20:20:59.594Z"
   },
   {
-    "id": "6906e294-c1af-4e83-b863-a4d064cd4a39",
-    "title": "Work Order Title 3",
-    "description": "This is a detailed description for work order 3.",
-    "department": "SAFETY",
-    "priority": "MEDIUM",
-    "requesterName": "Requester 3",
-    "assignee": "Assignee 3",
-    "status": "NEW",
-    "createdAt": "2026-02-23T20:20:59.597Z",
-    "updatedAt": "2026-02-23T20:20:59.597Z"
-  },
-  {
     "id": "dde0be48-cd9c-4b35-a10d-a238ec259210",
     "title": "Work Order Title 4",
     "description": "This is a detailed description for work order 4.",
@@ -370,5 +358,137 @@
     "status": "NEW",
     "createdAt": "2026-02-23T23:15:07.790Z",
     "updatedAt": "2026-02-23T23:15:07.790Z"
+  },
+  {
+    "id": "265e56a6-611f-41a4-9a59-4e868940c080",
+    "title": "Computer parts",
+    "description": "This is a detailed description for work order 1.",
+    "department": "IT",
+    "priority": "LOW",
+    "requesterName": "Tim Allen",
+    "assignee": "Assignee 1",
+    "status": "NEW",
+    "createdAt": "2026-02-24T00:30:03.377Z",
+    "updatedAt": "2026-02-24T00:30:03.377Z"
+  },
+  {
+    "id": "5f8a5d0e-ac31-4386-aef8-20b32550d8f4",
+    "title": "Work Order Title 2",
+    "description": "This is a detailed description for work order 2.",
+    "department": "OTHER",
+    "priority": "MEDIUM",
+    "requesterName": "John Doe",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-24T00:30:03.380Z",
+    "updatedAt": "2026-02-24T00:30:03.380Z"
+  },
+  {
+    "id": "18419201-27c7-4577-9d7f-16701212d4a8",
+    "title": "Work Order Title 3",
+    "description": "This is a detailed description for work order 3.",
+    "department": "SAFETY",
+    "priority": "MEDIUM",
+    "requesterName": "Requester 3",
+    "assignee": "Assignee 3",
+    "status": "NEW",
+    "createdAt": "2026-02-24T00:30:03.382Z",
+    "updatedAt": "2026-02-24T00:30:03.382Z"
+  },
+  {
+    "id": "2d0d63b4-3a4a-4c19-a1d9-c3fa95459e32",
+    "title": "Work Order Title 4",
+    "description": "This is a detailed description for work order 4.",
+    "department": "FACILITIES",
+    "priority": "HIGH",
+    "requesterName": "Mark Brandon",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-24T00:30:03.384Z",
+    "updatedAt": "2026-02-24T00:30:03.384Z"
+  },
+  {
+    "id": "bb10cd49-6270-451d-99f8-4762de413dc6",
+    "title": "Work Order Title 8",
+    "description": "This is a detailed description for work order 8.",
+    "department": "FACILITIES",
+    "priority": "LOW",
+    "requesterName": "Requester 8",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-24T00:30:03.387Z",
+    "updatedAt": "2026-02-24T00:30:03.387Z"
+  },
+  {
+    "id": "4873b497-a4ea-40c8-8f51-478ed6c2d9df",
+    "title": "Testing",
+    "description": "Test create",
+    "department": "IT",
+    "priority": "LOW",
+    "requesterName": "Alex",
+    "assignee": null,
+    "status": "NEW",
+    "createdAt": "2026-02-24T01:39:23.457Z",
+    "updatedAt": "2026-02-24T01:39:23.457Z"
+  },
+  {
+    "id": "5bc1e7bb-3ec7-400a-af7d-b03e71fcdc1f",
+    "title": "Computer parts",
+    "description": "This is a detailed description for work order 1.",
+    "department": "IT",
+    "priority": "LOW",
+    "requesterName": "Tim Allen",
+    "assignee": "Assignee 1",
+    "status": "NEW",
+    "createdAt": "2026-02-24T01:43:13.669Z",
+    "updatedAt": "2026-02-24T01:43:13.669Z"
+  },
+  {
+    "id": "8fe82387-3e94-401b-906a-4ce43680fe71",
+    "title": "Work Order Title 2",
+    "description": "This is a detailed description for work order 2.",
+    "department": "OTHER",
+    "priority": "MEDIUM",
+    "requesterName": "John Doe",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-24T01:43:13.672Z",
+    "updatedAt": "2026-02-24T01:43:13.672Z"
+  },
+  {
+    "id": "02afbef5-e5a9-4172-90da-1a6a3f93790f",
+    "title": "Work Order Title 3",
+    "description": "This is a detailed description for work order 3.",
+    "department": "SAFETY",
+    "priority": "MEDIUM",
+    "requesterName": "Requester 3",
+    "assignee": "Assignee 3",
+    "status": "NEW",
+    "createdAt": "2026-02-24T01:43:13.674Z",
+    "updatedAt": "2026-02-24T01:43:13.674Z"
+  },
+  {
+    "id": "05230a8b-2a00-437b-92dc-0c0261ca42da",
+    "title": "Work Order Title 4",
+    "description": "This is a detailed description for work order 4.",
+    "department": "FACILITIES",
+    "priority": "HIGH",
+    "requesterName": "Mark Brandon",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-24T01:43:13.677Z",
+    "updatedAt": "2026-02-24T01:43:13.677Z"
+  },
+  {
+    "id": "baaffbc9-045a-4926-884b-794e92205c32",
+    "title": "Work Order Title 8",
+    "description": "This is a detailed description for work order 8.",
+    "department": "FACILITIES",
+    "priority": "LOW",
+    "requesterName": "Requester 8",
+    "assignee": "",
+    "status": "NEW",
+    "createdAt": "2026-02-24T01:43:13.679Z",
+    "updatedAt": "2026-02-24T01:43:13.679Z"
   }
 ]
